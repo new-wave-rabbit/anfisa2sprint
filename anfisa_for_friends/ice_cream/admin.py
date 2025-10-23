@@ -1,12 +1,18 @@
+# ice_cream/admin.py
 from django.contrib import admin
 
-# Register your models here.
 from .models import Category, IceCream, Topping, Wrapper
 
 admin.site.empty_value_display = 'Не задано'
 
-admin.site.register(Topping)
-admin.site.register(Wrapper)
+class IceCreamInline(admin.StackedInline):
+    model = IceCream
+    extra = 0
+
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = (
+        IceCreamInline,
+    )
 
 class IceCreamAdmin(admin.ModelAdmin):
     list_display = (
@@ -23,22 +29,15 @@ class IceCreamAdmin(admin.ModelAdmin):
         'category'
     )
     search_fields = ('title',)
-    list_filter = ('category',)
+    list_filter = ('is_published',)
     list_display_links = ('title',)
     filter_horizontal = ('toppings',)
 
-class IceCreamInline(admin.TabularInline):
-    model = IceCream
-    extra = 0  # Количество пустых шаблонов для объектов
-
-class CategoryAdmin(admin.ModelAdmin):
-    inlines = (
-        IceCreamInline,
-    )
-    list_display = (
-        'title',        
-    )
-
-# Регистрируем кастомное представление админ-зоны
+# Регистрируем класс с настройками админки для моделей IceCream и Category:
 admin.site.register(IceCream, IceCreamAdmin)
 admin.site.register(Category, CategoryAdmin)
+# Регистрируем модели Topping и Wrapper, 
+# чтобы ими можно было управлять через админку
+# (интерфейс админки для этих моделей останется стандартным):
+admin.site.register(Topping)
+admin.site.register(Wrapper)

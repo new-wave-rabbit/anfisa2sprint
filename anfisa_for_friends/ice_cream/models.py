@@ -4,7 +4,10 @@ from core.models import PublishedModel
 
 
 class Category(PublishedModel):
-    title = models.CharField('Название', max_length=256)
+    title = models.CharField(
+        'Название',
+        max_length=256,
+    )
     slug = models.SlugField('Слаг', max_length=64, unique=True)
     output_order = models.PositiveSmallIntegerField(
         'Порядок отображения',
@@ -30,10 +33,14 @@ class Topping(PublishedModel):
         return self.title
 
 class Wrapper(PublishedModel):
-    title = models.CharField(max_length=256, verbose_name='Название')
+    title = models.CharField(
+        max_length=256,
+        verbose_name='Название',
+        help_text='Уникальное название обёртки, не более 256 символов',
+    )
 
     class Meta:
-        verbose_name = 'обёртки'
+        verbose_name = 'объект «Обёртка»'
         verbose_name_plural = 'Обёртки'
 
     def __str__(self) -> str:
