@@ -29,7 +29,7 @@ class IceCreamAdmin(admin.ModelAdmin):
 
 class IceCreamInline(admin.TabularInline):
     model = IceCream
-    extra = 0
+    extra = 0  # Количество пустых шаблонов для объектов
 
 class CategoryAdmin(admin.ModelAdmin):
     inlines = (
