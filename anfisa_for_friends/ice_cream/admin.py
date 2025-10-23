@@ -27,7 +27,7 @@ class IceCreamAdmin(admin.ModelAdmin):
     list_display_links = ('title',)
     filter_horizontal = ('toppings',)
 
-class IceCreamInline(admin.StackedInline):
+class IceCreamInline(admin.TabularInline):
     model = IceCream
     extra = 0
 
