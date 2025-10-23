@@ -27,19 +27,18 @@ class IceCreamAdmin(admin.ModelAdmin):
     list_display_links = ('title',)
     filter_horizontal = ('toppings',)
 
+class IceCreamInline(admin.StackedInline):
+    model = IceCream
+    extra = 0
+
 class CategoryAdmin(admin.ModelAdmin):
+    inlines = (
+        IceCreamInline,
+    )
     list_display = (
-        'title',
-        'slug',
-        'output_order',
+        'title',        
     )
-    list_editable = (
-        'slug',
-        'output_order',
-    )
-    search_fields = ('title',)
-    list_filter = ('title',)
-    list_display_links = ('title',)
+
 # Регистрируем кастомное представление админ-зоны
 admin.site.register(IceCream, IceCreamAdmin)
 admin.site.register(Category, CategoryAdmin)
