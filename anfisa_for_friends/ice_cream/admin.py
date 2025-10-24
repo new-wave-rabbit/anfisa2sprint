@@ -36,7 +36,7 @@ class IceCreamAdmin(admin.ModelAdmin):
 # Регистрируем класс с настройками админки для моделей IceCream и Category:
 admin.site.register(IceCream, IceCreamAdmin)
 admin.site.register(Category, CategoryAdmin)
-# Регистрируем модели Topping и Wrapper, 
+# Регистрируем модели Topping и Wrapper,
 # чтобы ими можно было управлять через админку
 # (интерфейс админки для этих моделей останется стандартным):
 admin.site.register(Topping)
