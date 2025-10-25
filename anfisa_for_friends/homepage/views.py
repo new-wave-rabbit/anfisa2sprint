@@ -12,7 +12,7 @@ def index(request):
         # Делаем запрос, объединяя два условия
         # через Q-объекты и оператор AND:
         Q(is_published=True) & Q(is_on_main=True)
-    )
+    ).order_by('title')[1:4]
     # Полученный из БД QuerySet передаём в словарь контекста:
     context = {
         'ice_cream_list': ice_cream_list,
