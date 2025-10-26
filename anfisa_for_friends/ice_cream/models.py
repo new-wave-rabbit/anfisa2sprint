@@ -45,11 +45,16 @@ class Wrapper(PublishedModel):
 
     def __str__(self) -> str:
         return self.title
-        
+
 
 class IceCream(PublishedModel):
     title = models.CharField(max_length=256, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
+    price = models.DecimalField(verbose_name='Цена', max_digits=5, decimal_places=2, default=0)
+    output_order = models.PositiveSmallIntegerField(
+        'Порядок отображения',
+        default=100,
+        )
     wrapper = models.OneToOneField(
         Wrapper,
         on_delete=models.SET_NULL,
